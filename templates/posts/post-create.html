@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block title %}Create New Author{% endblock %}
+
+{% block content %}
+<div class="container mx-auto px-4 py-8">
+    <h1 class="text-3xl font-bold mb-6 text-center">Create New Author</h1>
+    <div class="max-w-md mx-auto">
+        <form method="post" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="mb-4">
+                <label for="name" class="block text-gray-700 text-sm font-bold mb-2">Post Name:</label>
+                <input type="text" id="name" name="name" required
+                       class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+            </div>
+            <div class="mb-4">
+                 <label for="author" class="block text-gray-700 text-sm font-bold mb-2">Author:</label>
+                <select id="author" name="author" required>
+                    <option value="">Choose an Author:</option>
+                    {% for author in authors %}
+                        <option value="{{ author.id }}">{{ author.first_name }} {{ author.last_name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="mb-4">
+                 <label for="category" class="block text-gray-700 text-sm font-bold mb-2">Category:</label>
+                <select id="category" name="category" required>
+                    <option value="">Select Category:</option>
+                    {% for category in categories %}
+                        <option value="{{ category.id }}">{{ category.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="mb-4">
+                 <label for="tag" class="block text-gray-700 text-sm font-bold mb-2">Tag:</label>
+                <select id="tag" name="tag" required>
+                    <option value="">Select a Tag:</option>
+                    {% for tag in tags %}
+                        <option value="{{ tag.id }}">{{ tag.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <div class="mb-6">
+                <label for="desc" class="block text-gray-700 text-sm font-bold mb-2">Description:</label>
+                <textarea type="text" id="desc" name="desc" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required></textarea>
+            </div>
+            <div class="mb-6">
+                <label for="image" class="block text-gray-700 text-sm font-bold mb-2">Image:</label>
+                <input type="file" id="image" name="image" accept="image/*" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+            </div>
+            <div class="flex items-center justify-between">
+                <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                    Create Posts
+                </button>
+                <a href="{% url 'posts:list' %}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Back to List</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %} Contact Form Submitted {% endblock %}
+
+{% block content %}
+    <div class="container mt-5">
+        <h2 class="text-center">Contact Form Submitted</h2>
+        <div class="alert alert-success text-center">
+            <strong>Success!</strong> Your contact form has been submitted successfully.
+        </div>
+        <div class="text-center">
+            <a href="{% url 'posts:contact' %}" class="btn btn-secondary">Go Back to Contact Form</a>
+        </div>
+    </div>
+{% endblock %}
+

@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block title %}Create New Author{% endblock %}
+
+{% block content %}
+<div class="container mx-auto px-4 py-8">
+    <h1 class="text-3xl font-bold mb-6 text-center">Create New Author</h1>
+    <div class="max-w-md mx-auto"> <!-- Centered form -->
+        <form method="post" class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="mb-4">
+                <label for="first_name" class="block text-gray-700 text-sm font-bold mb-2">First Name:</label>
+                <input type="text" id="first_name" name="first_name" required
+                       class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+            </div>
+            <div class="mb-4">
+                <label for="last_name" class="block text-gray-700 text-sm font-bold mb-2">Last Name:</label>
+                <input type="text" id="last_name" name="last_name" required
+                       class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+            </div>
+            <div class="mb-4">
+                <label for="dob" class="block text-gray-700 text-sm font-bold mb-2">Date of Birth:</label>
+                <input type="date" id="dob" name="dob" required
+                       class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+            </div>
+            <div class="mb-6">
+                <label for="phone" class="block text-gray-700 text-sm font-bold mb-2">Phone:</label>
+                <input type="tel" id="phone" name="phone" required
+                       class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+            </div>
+            <div class="mb-6">
+                <label for="image" class="block text-gray-700 text-sm font-bold mb-2">Image:</label>
+                <input type="file" id="image" name="image" accept="image/*" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required>
+            </div>
+            <div class="flex items-center justify-between">
+                <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
+                    Create Author
+                </button>
+                <a href="{% url 'authors:list' %}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Back to List</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
