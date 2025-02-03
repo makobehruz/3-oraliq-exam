@@ -1,10 +1,9 @@
-from tkinter.font import names
-
 from django.shortcuts import render, redirect, get_object_or_404
 from authors.models import Author
 from catalogs.models import Category
-from .models import Post, Comment, Contact
+from .models import Post, Comment
 from tags.models import Tag
+from django.db.models import Count
 
 
 def home(request):
@@ -13,6 +12,7 @@ def home(request):
     created_at = request.GET.get('created_at')
     updated_at = request.GET.get('updated_at')
     category = request.GET.get('category')
+    sort_by = request.GET.get('sort', 'latest')
     if category:
         posts = posts.filter(category__name=category)
     if tag:
@@ -23,10 +23,21 @@ def home(request):
         posts = posts.filter(create_at__gte=created_at)
     elif updated_at:
         posts = posts.filter(update_at__lte=updated_at)
+    if sort_by == 'latest':
+        posts = posts.order_by('-created_at')
+    elif sort_by == 'oldest':
+        posts = posts.order_by('created_at')
+    elif sort_by == 'popular':
+        posts = posts.annotate(comment_count=Count('comments')).order_by('-comment_count')
     categories = Category.objects.all()
     tags = Tag.objects.all()
-    ctx = {'posts': posts, 'categories': categories, 'tags': tags}
-    return render(request,'index_with_side_bar.html', ctx)
+    ctx = {
+        'posts': posts,
+        'categories': categories,
+        'tags': tags,
+        'sort_by': sort_by,
+    }
+    return render(request, 'index_with_side_bar.html', ctx)
 
 def post_list(request):
     posts = Post.objects.all()
@@ -43,15 +54,15 @@ def post_create(request):
         category = request.POST.get('category')
         if name and author and image and desc and tag and category:
             author = Author.objects.get(id=author)
-            tag = Tag.objects.get(id=tag)
             category = Category.objects.get(id=category)
+            tag = Tag.objects.get(id=tag)
             Post.objects.create(
                 name = name,
                 author = author,
                 image = image,
                 desc = desc,
-                tag = tag,
                 category = category,
+                tag = tag,
             )
             return redirect('posts:list')
     authors = Author.objects.all()
@@ -88,16 +99,20 @@ def post_detail(request, pk, year, month, day, slug):
 def contact_list(request):
     return render(request,'contact.html')
 
-def contact_create(request):
-    if request.method == 'POST':
-        name = request.POST.get('name')
-        email = request.POST.get('email')
-        message = request.POST.get('message')
-        if name and email and message:
-            Contact.objects.create(
-                name = name,
-                email = email,
-                message = message
-            )
-            return redirect('posts:contact')
-    return render(request,'posts/approved.html')
+def contact_approved(request):
+    return render(request,'approved.html')
+
+def about_list(request):
+    return render(request,'about.html')
+
+def blog_search(request):
+    query = request.GET.get('q')
+    posts = Post.objects.all()
+    if query:
+        posts = posts.filter(name__icontains=query)
+    context = {
+        'posts': posts,
+        'query': query
+    }
+    return render(request, 'index_with_side_bar.html', context)
+

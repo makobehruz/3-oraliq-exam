@@ -5,11 +5,11 @@
 {% block content %}
     <main class="container mx-auto px-6 py-8">
         <article class="bg-white rounded-lg shadow-md overflow-hidden">
-            <img src="https://devblogs.microsoft.com/python/wp-content/uploads/sites/12/2018/08/pythonfeature.png" alt="Blog post cover image" class="w-full h-64 object-cover">
+            <img src="{{ post.image.url }}" alt="Blog post cover image" class="w-full h-64 object-cover">
             <div class="p-6 md:p-8">
                 <h1 class="text-3xl md:text-4xl font-bold mb-4">{{ post.name }}</h1>
                 <div class="flex items-center mb-4">
-                    <img src="https://img.freepik.com/free-vector/hacker-operating-laptop-cartoon-icon-illustration-technology-icon-concept-isolated-flat-cartoon-style_138676-2387.jpg" alt="Author" class="w-10 h-10 rounded-full mr-3">
+                    <img src="{{ post.author.image.url }}" alt="Author" class="w-10 h-10 rounded-full mr-3">
                     <div>
                         <p class="font-semibold text-gray-800">{{ post.author }}</p>
                         <p class="text-sm text-gray-600">Published on {{ post.create_at }}• 5 min read</p>
@@ -56,6 +56,12 @@
                         <label for="comment" class="block text-gray-700 text-sm font-bold mb-2">Comment</label>
                         <textarea id="comment" name="comment" rows="4" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" required></textarea>
                     </div>
+                    <a href="{% url 'home' %}" class="group inline-flex items-center justify-center px-6 py-3 text-base font-medium text-white bg-blue-600 border border-transparent rounded-md shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition duration-150 ease-in-out transform hover:-translate-y-1 hover:scale-105">
+                        <svg class="w-5 h-5 mr-2 transition-transform duration-300 ease-in-out transform group-hover:-translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                        </svg>
+                        Back to Home
+                    </a>
                     <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">Submit Comment</button>
                 </form>
             </div>

@@ -1,5 +1,3 @@
-from tkinter.font import names
-
 from django.db import models
 from authors.base_model import BaseModel
 from authors.models import Author
@@ -43,13 +41,4 @@ class Comment(BaseModel):
 
     def __str__(self):
         return self.name
-
-class Contact(BaseModel):
-    name = models.CharField(max_length=100)
-    email = models.EmailField()
-    message = models.TextField()
-
-    def __str__(self):
-        return self.name
-
 

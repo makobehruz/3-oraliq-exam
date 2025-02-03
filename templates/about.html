@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+
+{% block title %}About - Modern Blog{% endblock %}
+
+{% block extra_head %}
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+{% endblock %}
+
+{% block content %}
+    <div class="container mx-auto px-6 py-8">
+        <div class="bg-white rounded-lg shadow-md p-8">
+            <h1 class="text-3xl font-bold mb-6">About Modern Blog</h1>
+            
+            <div class="prose max-w-none">
+                <p class="mb-4">Welcome to Modern Blog, a platform dedicated to sharing insightful and engaging content across various topics. Our mission is to provide readers with high-quality articles that inform, inspire, and entertain.</p>
+                
+                <h2 class="text-2xl font-semibold mt-6 mb-4">Our Story</h2>
+                <p class="mb-4">Modern Blog was founded in 2023 by a group of passionate writers and tech enthusiasts. We saw a need for a blog that combines cutting-edge design with thoughtful, well-researched content. Since then, we've grown into a community of diverse voices, each bringing their unique perspective to our platform.</p>
+                
+                <h2 class="text-2xl font-semibold mt-6 mb-4">What We Offer</h2>
+                <ul class="list-disc pl-6 mb-4">
+                    <li>In-depth articles on technology, lifestyle, culture, and more</li>
+                    <li>Expert opinions and analysis on current trends</li>
+                    <li>Engaging discussions through our comment section and community forums</li>
+                    <li>Regular updates on the latest developments in various fields</li>
+                </ul>
+                
+                <h2 class="text-2xl font-semibold mt-6 mb-4">Our Team</h2>
+                <p class="mb-4">Behind Modern Blog is a dedicated team of writers, editors, and tech experts. We're committed to bringing you the best content possible, ensuring that each article meets our high standards for quality and accuracy.</p>
+                
+                <h2 class="text-2xl font-semibold mt-6 mb-4">Contact Us</h2>
+                <p class="mb-4">We love hearing from our readers! If you have any questions, suggestions, or just want to say hello, don't hesitate to reach out to us at <a href="mailto:contact@modernblog.com" class="text-blue-500 hover:underline">contact@modernblog.com</a>.</p>
+                
+                <p class="mt-8">Thank you for being a part of the Modern Blog community. We look forward to continuing to provide you with great content and fostering meaningful discussions.</p>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+

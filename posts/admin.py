@@ -1,10 +1,11 @@
 from django.contrib import admin
-from .models import Post
+from .models import Post, Tag
 
 
 class PostInline(admin.StackedInline):
     model = Post
     extra = 1
+
 
 @admin.register(Post)
 class PostAdmin(admin.ModelAdmin):

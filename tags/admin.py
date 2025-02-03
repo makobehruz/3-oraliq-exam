@@ -8,3 +8,4 @@ class TagAdmin(admin.ModelAdmin):
     search_fields = ['id', 'name']
 
 
+
