@@ -32,9 +32,9 @@
                 </select>
             </div>
             <div class="mb-4">
-                 <label for="tag" class="block text-gray-700 text-sm font-bold mb-2">Tag:</label>
-                <select id="tag" name="tag" required>
-                    <option value="">Select a Tag:</option>
+                <label for="tag" class="block text-gray-700 text-sm font-bold mb-2">Tag:</label>
+                <select id="tags" name="tags" multiple required>
+                    <option value="">Select Tags:</option>
                     {% for tag in tags %}
                         <option value="{{ tag.id }}">{{ tag.name }}</option>
                     {% endfor %}

@@ -12,7 +12,7 @@ class Post(BaseModel):
     author = models.ForeignKey(Author, on_delete=models.CASCADE, related_name='posts')
     image = models.ImageField(upload_to='posts_image/')
     desc = models.TextField()
-    tag = models.ForeignKey(Tag, on_delete=models.CASCADE, related_name='posts')
+    tag = models.ManyToManyField(Tag, related_name='posts')
     category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='posts')
     slug = models.SlugField(unique=True, blank=True)
 

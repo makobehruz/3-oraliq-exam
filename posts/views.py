@@ -50,26 +50,27 @@ def post_create(request):
         author = request.POST.get('author')
         image = request.FILES.get('image')
         desc = request.POST.get('desc')
-        tag = request.POST.get('tag')
+        tag_ids = request.POST.getlist('tags')
         category = request.POST.get('category')
-        if name and author and image and desc and tag and category:
+        if name and author and image and desc and tag_ids and category:
             author = Author.objects.get(id=author)
             category = Category.objects.get(id=category)
-            tag = Tag.objects.get(id=tag)
+            tags = Tag.objects.filter(id__in=tag_ids)
             Post.objects.create(
-                name = name,
-                author = author,
-                image = image,
-                desc = desc,
-                category = category,
-                tag = tag,
-            )
+                name=name,
+                author=author,
+                image=image,
+                desc=desc,
+                category=category,
+            ).tag.set(tags)
             return redirect('posts:list')
+
     authors = Author.objects.all()
     tags = Tag.objects.all()
     categories = Category.objects.all()
     ctx = {'authors': authors, 'tags': tags, 'categories': categories}
-    return render(request,'posts/post-create.html', ctx)
+    return render(request, 'posts/post-create.html', ctx)
+
 
 def post_detail(request, pk, year, month, day, slug):
     post = get_object_or_404(
